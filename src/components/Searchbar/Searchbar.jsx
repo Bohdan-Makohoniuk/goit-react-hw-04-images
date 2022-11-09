@@ -1,17 +1,25 @@
 import { Component } from 'react';
+// import {toast} from 'react-toastify';
 
 class Searchbar extends Component{
     state = {
     query: '',
   };
-
+// Відслідковує та відображає набране в state.query до Submit
   handleChange = e => {
     const query = e.target.value;
+    // Очищення query після Submit
     this.setState({ query });
   };
-
+// Передає стан query в App після Submit 
   handleSubmit = e => {
+    // preventDefault блокує перезавантаження сторінки
     e.preventDefault();
+    if (this.state.query.trim() === '') {
+      return alert('add Serch');
+      // toast.info("add Serch");
+    }
+    
     this.props.onSubmit(this.state.query);
   };
     render() {
@@ -19,7 +27,7 @@ class Searchbar extends Component{
       <header className="Searchbar">
         <form className="SearchForm" onSubmit={this.handleSubmit}>
           <button className="SearchForm-button" type="submit">
-            Search
+            Пошук
           </button>
 
           <input
@@ -27,7 +35,7 @@ class Searchbar extends Component{
             type="text"
             autoComplete="off"
             autoFocus
-            placeholder="Find some pictures"
+            placeholder="Search images and photos"
             name="query"
             value={this.state.query}
             onChange={this.handleChange}
