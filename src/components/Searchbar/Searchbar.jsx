@@ -16,8 +16,11 @@ class Searchbar extends Component{
     // preventDefault блокує перезавантаження сторінки
     e.preventDefault();
     if (this.state.query.trim() === '') {
-      return alert('add Serch');
-      // toast.info("add Serch");
+      // toast.info("Lorem ipsum dolor");
+      // toast.error("add Serch");
+      return; 
+      
+      // alert('add Serch');
     }
     
     this.props.onSubmit(this.state.query);

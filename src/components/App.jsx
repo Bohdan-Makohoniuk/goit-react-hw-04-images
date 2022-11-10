@@ -7,7 +7,7 @@ import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
 
 // Бібліотека для сповіщень
-// import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -80,18 +80,18 @@ export class App extends Component {
             closeModal={this.toggleModal}
           />
         )}
-        {/* <ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/> */}
+        <ToastContainer
+// position="top-right"
+autoClose={2000}
+// hideProgressBar={false}
+// newestOnTop={false}
+// closeOnClick
+// rtl={false}
+// pauseOnFocusLoss
+// draggable
+// pauseOnHover
+// theme="light"
+/>
 
       </>
     );
