@@ -24,6 +24,7 @@ export class App extends Component {
     totalHits: 0,
   };
 
+
   componentDidUpdate = (_, prevState) => {
     if (
       this.state.query !== prevState.query ||
