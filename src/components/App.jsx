@@ -35,13 +35,13 @@ export class App extends Component {
         .then(data => {
           this.setState(prevState => ({
             images:
-              this.state.page === 1
-                ? [...data.hits]
-                : [...prevState.images, ...data.hits],
+              // this.state.page === 1
+              //   ? [...data.hits]
+                [...prevState.images, ...data.hits],
             totalHits:
-              this.state.page === 1
-                ? data.totalHits - data.hits.length
-                : data.totalHits - [...prevState.images, ...data.hits].length,
+              // this.state.page === 1
+              //   ? data.totalHits - data.hits.length
+                 data.totalHits - [...prevState.images, ...data.hits].length,
           }));
         })
         .finally(() => {
