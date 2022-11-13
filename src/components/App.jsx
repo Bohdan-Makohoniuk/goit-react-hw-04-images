@@ -8,6 +8,7 @@ import { Modal } from './Modal/Modal';
 
 // Бібліотека для сповіщень
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -51,7 +52,7 @@ export class App extends Component {
   };
 
   handleSubmit = query => {
-    this.setState({ query, page: 1 });
+    this.setState({ query, page: 1, images:[] });
   };
 
   handleLoadMore = () => {
@@ -72,28 +73,20 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleSubmit} />
         {this.state.isLoading && <Loader />}
         <ImageGallery images={this.state.images} openModal={this.toggleModal} />
-        {!!this.state.totalHits && (
+          
+        {this.state.page < Math.ceil(this.state.totalHits/12)&& (
           <LoadMore onLoadMore={this.handleLoadMore} />
         )}
+        {/* {!!this.state.totalHits && (
+          <LoadMore onLoadMore={this.handleLoadMore} />
+        )} */}
         {this.state.showModal && (
           <Modal
             modalImage={this.state.modalImage}
             closeModal={this.toggleModal}
           />
         )}
-        <ToastContainer
-// position="top-right"
-autoClose={2000}
-// hideProgressBar={false}
-// newestOnTop={false}
-// closeOnClick
-// rtl={false}
-// pauseOnFocusLoss
-// draggable
-// pauseOnHover
-// theme="light"
-/>
-
+        <ToastContainer autoClose={1000}/>
       </>
     );
   }

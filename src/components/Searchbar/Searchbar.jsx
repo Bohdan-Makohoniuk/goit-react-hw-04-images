@@ -1,5 +1,5 @@
 import { Component } from 'react';
-// import {toast} from 'react-toastify';
+import {toast} from 'react-toastify';
 
 class Searchbar extends Component{
     state = {
@@ -16,7 +16,7 @@ class Searchbar extends Component{
     // preventDefault блокує перезавантаження сторінки
     e.preventDefault();
     if (this.state.query.trim() === '') {
-      // toast.info("Lorem ipsum dolor");
+      toast.info("add Serch");
       // toast.error("add Serch");
       return; 
       
