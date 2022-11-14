@@ -23,6 +23,7 @@ export class App extends Component {
     modalImage: '',
     showModal: false,
     totalHits: 0,
+    
   };
 
 
@@ -30,19 +31,16 @@ export class App extends Component {
     if (
       this.state.query !== prevState.query ||
       this.state.page !== prevState.page
-    ) {
+    )
+    {
       this.setState({ isLoading: true });
       fetchImages(this.state.query, this.state.page)
         .then(data => {
           this.setState(prevState => ({
             images:
-              // this.state.page === 1
-              //   ? [...data.hits]
                 [...prevState.images, ...data.hits],
-            totalHits:
-              // this.state.page === 1
-              //   ? data.totalHits - data.hits.length
-                 data.totalHits - [...prevState.images, ...data.hits].length,
+            totalHits: Math.ceil(data.totalHits/12)
+                //  data.totalHits - [...prevState.images, ...data.hits].length,
           }));
         })
         .finally(() => {
@@ -66,6 +64,13 @@ export class App extends Component {
     }
     this.setState({ modalImage, showModal: true });
   };
+  
+  showBtn = (totalHits) => {
+    if(totalHits) {
+    this.setState({ loadMore: false })
+    return;
+  }
+  }
 
   render() {
     return (
@@ -74,10 +79,10 @@ export class App extends Component {
         {this.state.isLoading && <Loader />}
         <ImageGallery images={this.state.images} openModal={this.toggleModal} />
           
-        {this.state.page < Math.ceil(this.state.totalHits/12)&& (
-          <LoadMore onLoadMore={this.handleLoadMore} />
-        )}
-        {/* {!!this.state.totalHits && (
+          <LoadMore toShow={this.showBtn}  onLoadMore={this.handleLoadMore} />
+        
+        
+        {/* {this.state.page < Math.ceil(this.state.totalHits/12)&& (
           <LoadMore onLoadMore={this.handleLoadMore} />
         )} */}
         {this.state.showModal && (
