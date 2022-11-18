@@ -39,8 +39,8 @@ export class App extends Component {
           this.setState(prevState => ({
             images:
                 [...prevState.images, ...data.hits],
-            totalHits: Math.ceil(data.totalHits/12)
-                //  data.totalHits - [...prevState.images, ...data.hits].length,
+            showModal: this.page < Math.ceil(data.totalHits/12),
+             
           }));
         })
         .finally(() => {
@@ -65,12 +65,6 @@ export class App extends Component {
     this.setState({ modalImage, showModal: true });
   };
   
-  showBtn = (totalHits) => {
-    if(totalHits) {
-    this.setState({ loadMore: false })
-    return;
-  }
-  }
 
   render() {
     return (
@@ -79,16 +73,12 @@ export class App extends Component {
         {this.state.isLoading && <Loader />}
         <ImageGallery images={this.state.images} openModal={this.toggleModal} />
           
-          <LoadMore toShow={this.showBtn}  onLoadMore={this.handleLoadMore} />
-        
-        
-        {/* {this.state.page < Math.ceil(this.state.totalHits/12)&& (
           <LoadMore onLoadMore={this.handleLoadMore} />
-        )} */}
+      
         {this.state.showModal && (
           <Modal
             modalImage={this.state.modalImage}
-            closeModal={this.toggleModal}
+            closeModal={this.toggleModal} 
           />
         )}
         <ToastContainer autoClose={1000}/>
